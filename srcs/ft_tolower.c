@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: meferraz <meferraz@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: meferraz <meferraz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 15:51:50 by meferraz          #+#    #+#             */
-/*   Updated: 2024/10/21 16:09:44 by meferraz         ###   ########.fr       */
+/*   Created: 2024/10/18 16:45:29 by meferraz          #+#    #+#             */
+/*   Updated: 2024/10/18 16:48:17 by meferraz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/libft.h"
 
-int	ft_isalnum(int c)
+char	ft_tolower(char c)
 {
-	return (ft_isalpha(c) || ft_isdigit(c));
+	if (c >= 'A' && c <= 'Z')
+		c += 32;
+	return (c);
 }
