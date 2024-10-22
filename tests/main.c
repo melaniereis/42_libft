@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+/************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -6,192 +6,60 @@
 /*   By: meferraz <meferraz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 11:23:28 by meferraz          #+#    #+#             */
-/*   Updated: 2024/10/21 16:23:21 by meferraz         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:47:12 by meferraz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/libft.h"
-
-void	ft_isalpha_test();
-void	ft_isdigit_test();
-void	ft_isalnum_test();
+# include "./test.h"
 
 int	main(void)
 {
 	ft_isalpha_test();
 	ft_isdigit_test();
 	ft_isalnum_test();
+	/*ft_isupper_test();
+	ft_islower_test();
+	ft_isascii_test();
+	ft_isprint_test();
+	ft_strlen_test();
+	ft_memset_test();	
+	ft_bzero_test();
+	ft_memcpy_test();
+	ft_memmove_test();
+	ft_strlcpy_test();
+	ft_strlcat_test();
+	ft_toupper_test();
+	ft_tolower_test();
+i	*/
+	ft_strchr_test();
+	/*ft_strrchr_test();
+	ft_strncmp_test();
+	ft_memchr_test();
+	ft_memcmp_test();
+	ft_strnstr_test();
+	ft_atoi_test();
+	ft_calloc_test();
+	ft_strdup_test();
+	ft_substr_test();
+	ft_strjoin_test();
+	ft_strtrim_test();
+	ft_split_test();
+	ft_itoa_test();
+	ft_strmapi_test();
+	ft_striteri_test();
+	ft_putchar_fd_test();
+	ft_putstr_fd_test();
+	ft_putendl_fd_test();
+	ft_putnbr_fd_test();
+	// BONUS PART
+	ft_lstnew_test();
+	ft_lstadd_front_test();
+	ft_lstsize_test();
+	ft_lstlast_test();
+	ft_lstadd_back_test();
+	ft_lstdelone_test();
+	ft_lstclear_test();
+	ft_lstiter_test();
+	ft_lstmap_test();*/
 	return (0);
 }
-
-void	ft_isalpha_test()
-{
-	char a, b;
-	int c, d;
-	int aa, bb;
-	
-	// Clear input buffer
-	printf("*****************\n");
-	printf("ft_isalpha_test\n");
-	printf("*****************\n\n");
-	
-	printf("Enter an alphabetic character:\n");
-	scanf(" %c", &a);
-	printf("Enter a non-alphabetic character:\n");
-	scanf(" %c", &b);
-	
-	aa = a;
-	bb = b;
-	c = isalpha(aa);
-	d = ft_isalpha(aa);
-	printf("*****************\n");
-	printf("Return of lib func >> %d \n", c);
-	printf("Return of ft func >> %d \n", d);
-	printf("*****************\n");
-
-	if (c && d) // Simplified check
-		printf("%c is indeed an alpha!\n", aa);
-	else
-        	printf("%c is not an alpha!\n", aa);
-
-	c = isalpha(bb);
-	d = ft_isalpha(bb);
-	printf("*****************\n");
-	printf("Return of lib func >> %d \n", c);
-	printf("Return of ft func >> %d \n", d);
-	printf("*****************\n");
-
-	if (c && d) // Simplified check
-		printf("%c is indeed an alpha!\n", bb);
-	else
-		printf("%c is not an alpha!\n", bb);
-
-	printf("*****************\n\n");
-}
-
-void	ft_isdigit_test()
-{
-	char a, b;
-	int c, d;
-	int aa, bb;
-	
-	// Clear input buffer
-	printf("*****************\n");
-	printf("ft_isdigit_test\n");
-	printf("*****************\n\n");
-	
-	printf("Enter a digit character:\n");
-	scanf(" %c", &a);
-	printf("Enter a non-digit character:\n");
-	scanf(" %c", &b);
-	
-	aa = a;
-	bb = b;
-	c = isdigit(aa);
-	d = ft_isdigit(aa);
-	printf("*****************\n");
-	printf("Return of lib func >> %d \n", c);
-	printf("Return of ft func >> %d \n", d);
-	printf("*****************\n");
-
-	if (c && d) // Simplified check
-		printf("%c is indeed a digit!\n", aa);
-	else
-        	printf("%c is not a digit!\n", aa);
-
-	c = isdigit(bb);
-	d = ft_isdigit(bb);
-	printf("*****************\n");
-	printf("Return of lib func >> %d \n", c);
-	printf("Return of ft func >> %d \n", d);
-	printf("*****************\n");
-
-	if (c && d) // Simplified check
-		printf("%c is indeed a digit!\n", bb);
-	else
-		printf("%c is not a digit!\n", bb);
-
-	printf("*****************\n\n");
-}
-
-void	ft_isalnum_test()
-{
-	char a, b;
-	int c, d;
-	int aa, bb;
-	
-	// Clear input buffer
-	printf("*****************\n");
-	printf("ft_isalnum_test\n");
-	printf("*****************\n\n");
-	
-	printf("Enter a numeric or alphabetic character:\n");
-	scanf(" %c", &a);
-	printf("Enter a non-numeric and non-alphabetic character:\n");
-	scanf(" %c", &b);
-	
-	aa = a;
-	bb = b;
-	c = isalnum(aa);
-	d = ft_isalnum(aa);
-	printf("*****************\n");
-	printf("Return of lib func >> %d \n", c);
-	printf("Return of ft func >> %d \n", d);
-	printf("*****************\n");
-
-	if (c && d) // Simplified check
-		printf("%c is indeed an alphanumeric!\n", aa);
-	else
-        	printf("%c is not an alphanumeric!\n", aa);
-
-	c = isalnum(bb);
-	d = ft_isalnum(bb);
-	printf("*****************\n");
-	printf("Return of lib func >> %d \n", c);
-	printf("Return of ft func >> %d \n", d);
-	printf("*****************\n");
-
-	if (c && d) // Simplified check
-		printf("%c is indeed an alphanumeric!\n", bb);
-	else
-		printf("%c is not an alphanumeric!\n", bb);
-
-	printf("*****************\n\n");
-}
-
-void	ft_isalnum_test()
-{
-	char a, b;
-	int c, d;
-	int aa, bb;
-	
-	// Clear input buffer
-	printf("*****************\n");
-	printf("ft_isalnum_test\n");
-	printf("*****************\n\n");
-	
-	printf("Enter a numeric or alphabetic character:\n");
-	scanf(" %c", &a);
-	printf("Enter a non-numeric and non-alphabetic character:\n");
-	scanf(" %c", &b);
-	
-	aa = a;
-	bb = b;
-	c = isalnum(aa);
-	d = ft_isalnum(aa);
-	printf("*****************\n");
-	printf("Return of lib func >> %d \n", c);
-	printf("Return of ft func >> %d \n", d);
-	printf("*****************\n");
-
-	if (c && d) // Simplified check
-		printf("%c is indeed an alphanumeric!\n", aa);
-	else
-        	printf("%c is not an alphanumeric!\n", aa);
-
-	c = isalnum(bb);
-	d = ft_isalnum(bb);
-	printf("*****************\n");
-	printf("Return of lib func >> %d \n", c);
-	printf("Return of ft func >> %d \n", d);
-	printf("**

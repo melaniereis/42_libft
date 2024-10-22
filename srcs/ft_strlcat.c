@@ -6,7 +6,7 @@
 /*   By: meferraz <meferraz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 15:38:52 by meferraz          #+#    #+#             */
-/*   Updated: 2024/10/21 16:27:14 by meferraz         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:43:26 by meferraz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	return (len);
 }
 
-int	main(void)
+/*int	main(void)
 {
 	char	s[20] = "Hello ";
 	char	*s2 = "World";
@@ -49,4 +49,4 @@ int	main(void)
 	printf("String before strlcat %s \n", ss);
 	ft_strlcat(ss, ss2, sizeof(s));
 	printf("String after strlcat %s \n", ss);
-}
+}*/
