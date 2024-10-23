@@ -17,6 +17,7 @@ int	main(void)
 	ft_isalpha_test();
 	ft_isdigit_test();
 	ft_isalnum_test();
+	
 	/*ft_isupper_test();
 	ft_islower_test();
 	ft_isascii_test();
@@ -31,11 +32,12 @@ int	main(void)
 	ft_toupper_test();
 	ft_tolower_test();
 i	*/
+
 	ft_strchr_test();
-	/*ft_strrchr_test();
+	ft_strrchr_test();
 	ft_strncmp_test();
 	ft_memchr_test();
-	ft_memcmp_test();
+	/*ft_memcmp_test();
 	ft_strnstr_test();
 	ft_atoi_test();
 	ft_calloc_test();
