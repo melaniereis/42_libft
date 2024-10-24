@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meferraz <meferraz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 17:24:05 by meferraz          #+#    #+#             */
-/*   Updated: 2024/10/22 17:29:43 by meferraz         ###   ########.fr       */
+/*   Created: 2024/10/24 09:16:25 by meferraz          #+#    #+#             */
+/*   Updated: 2024/10/24 09:19:53 by meferraz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "../includes/libft.h"
 
-void	*ft_calloc(size_t num_element, size_t element_size)
+char	*ft_strdup(const char *src)
 {
-	void	*ptr;
-	size_t	total_size;
+	char	*p;
+	int		i;
+	int		size;
 
-	total_size = num_element * element_size;
-	ptr = malloc(total_size);
-	if (!ptr)
+	if (!src)
 		return (NULL);
-	return (ft_memset(ptr, 0, total_size));
+	size = ft_strlen(src);
+	p = malloc(sizeof(char) * (size + 1));
+	i = 0;
+	while (i < size)
+	{
+		p[i] = src[i];
+		i++;
+	}
+	p[i] = '\0';
+	return (p);
 }
+/*
+int 	main(void)
+{
+	char	*s = "Hello";
+	char	*p;
+
+	p = ft_strdup(s);
+	printf("%s", p);
+	free(p);
+}*/

@@ -31,7 +31,6 @@ int	main(void)
 	ft_strlcat_test();
 	ft_toupper_test();
 	ft_tolower_test();
-i	*/
 
 	ft_strchr_test();
 	ft_strrchr_test();
