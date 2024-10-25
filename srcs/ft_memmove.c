@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmov.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meferraz <meferraz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:03:42 by meferraz          #+#    #+#             */
-/*   Updated: 2024/10/18 15:34:45 by meferraz         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:17:03 by meferraz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/libft.h"
 
-/*void	*ft_memmove(void *dest, const void *src, size_t n);
+void	*ft_memmove(void *dest, const void *src, size_t n);
 
 int	main(void)
 {
@@ -32,7 +32,7 @@ int	main(void)
 
 	memmove(dst3, src2, 10);
 	printf("dst3 >> %s \n", dst3);
-	ft_memmove(dst4, src2, 10);
+	ft_memmove(dst4, src2, 40);
 	printf("dst4 >> %s \n", dst4);
 
 	printf("================\n");
@@ -44,14 +44,14 @@ int	main(void)
 
 	return (0);
 }
-*/
+
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
 	unsigned const char	*s;
 	unsigned char		*d;
 
-	if (!src || !dest)
-		return (dest);
+	if (!src && !dest)
+		return (NULL);
 	s = src;
 	d = dest;
 	if (d < s)

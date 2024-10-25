@@ -6,68 +6,30 @@
 /*   By: meferraz <meferraz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 14:11:55 by meferraz          #+#    #+#             */
-/*   Updated: 2024/10/24 15:39:32 by meferraz         ###   ########.fr       */
+/*   Updated: 2024/10/25 16:38:47 by meferraz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../includes/libft.h"
 
-int	ft_strlen(char *str)
+size_t	count_words(char *s, char c)
 {
-	int	i;
-
-	i = 0;
-	if (str == NULL)
-		return (0);
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
-
-int	ft_strlen2(char **str)
-{
-	int	i;
-
-	i = 0;
-	if (*str == NULL)
-		return (0);
-	while (str[i] != NULL)
-		i++;
-	return (i);
-}
-
-int	is_c(char c, char *charset)
-{
-	int	i;
-
-	i = 0;
-	while (charset[i] != '\0')
-	{
-		if (c == charset[i])
-			return (1);
-		i++;
-	}
-	if (c == '\0')
-		return (1);
-	return (0);
-}
-
-int	count_words(char *s, char c)
-{
-	int	i;
-	int	words;
+	size_t	i;
+	size_t	words;
 
 	i = 0;
 	words = 0;
+	if (s[i] != c)
+			words++;
 	while (s[i] != '\0')
 	{
-		if (is_c(s[i + 1], c) && !(is_c(s[i], c)))
+		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
 			words++;
 		i++;
 	}
 	return (words);
 }
 
-void	write_word(char *dest, char *src, char *c)
+void	write_word(char *dest, char *src, char c)
 {
 	int	i;
 
