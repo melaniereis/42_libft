@@ -11,28 +11,29 @@
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
-#include <string.h>
 
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t	needle_size;
-	char	*end;
-	size_t	equal;
+	size_t	i;
+	size_t	j;
 
-	if (haystack == NULL || needle == NULL || len == 0)
-		return (NULL);
-	needle_size = ft_strlen(needle);
-	if (needle_size > len)
-		return (NULL);
-	end = (char *) haystack + len - needle_size;
-	while (*haystack <= *end)
+	if (!big && !len)
+		return (0);
+	if (little[0] == '\0')
+		return ((char *)big);
+	i = 0;
+	while (i < len && big[i])
 	{
-		equal = ft_strncmp(haystack, needle, needle_size);
-		if (*haystack == *needle && equal == 0)
-			return ((char *)haystack);
-		haystack++;
+		j = 0;
+		while (i + j < len && big[i + j] != '\0' && big[i + j] == little[j])
+		{
+			if (little[j + 1] == '\0')
+				return ((char *)&big[i]);
+			j++;
+		}
+		i++;
 	}
-	return (NULL);
+	return (0);
 }
 /*
 void test_case(const char *haystack, const char *needle, size_t len) {

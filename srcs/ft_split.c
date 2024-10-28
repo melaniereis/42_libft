@@ -11,15 +11,15 @@
 /* ************************************************************************** */
 #include "../includes/libft.h"
 
-size_t	count_words(char *s, char c)
+static size_t	count_words(char const *s, char c)
 {
 	size_t	i;
 	size_t	words;
 
 	i = 0;
 	words = 0;
-	if (s[i] != c)
-			words++;
+	if (s[i] != c && s[i] != '\0')
+		words++;
 	while (s[i] != '\0')
 	{
 		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
@@ -29,42 +29,59 @@ size_t	count_words(char *s, char c)
 	return (words);
 }
 
-void	write_word(char *dest, char *src, char c)
+static void	write_word(char *dest, char const *src, int len)
 {
 	int	i;
 
 	i = 0;
-	while (!is_c(src[i], c))
+	while (i < len)
 	{
 		dest[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
+	dest[len] = '\0';
 }
 
-void	write_s(char **strings, char *str, char *c)
+static int	alloc_word(char **strings, char const *str, char c, int w)
+{
+	int	j;
+
+	j = 0;
+	while (str[j] != c && str[j] != '\0')
+		j++;
+	strings[w] = malloc(sizeof(char) * (j + 1));
+	if (!strings[w])
+		return (0);
+	write_word(strings[w], str, j);
+	return (1);
+}
+
+static void	write_s(char **strings, char const *str, char c)
 {
 	int	i;
-	int	j;
 	int	word;
 
 	i = 0;
 	word = 0;
 	while (str[i] != '\0')
 	{
-		if (is_c(str[i], c))
+		if (str[i] == c)
 			i++;
 		else
 		{
-			j = 0;
-			while (!is_c(str[i + j], c))
-				j++;
-			strings[word] = malloc(sizeof(char) * (j + 1));
-			write_word(strings[word], str + i, c);
-			i += j;
+			if (!alloc_word(strings, str + i, c, word))
+			{
+				while (word > 0)
+					free(strings[--word]);
+				free(strings);
+				return ;
+			}
 			word++;
+			while (str[i] != c && str[i] != '\0')
+				i++;
 		}
 	}
+	strings[word] = NULL;
 }
 
 char	**ft_split(char const *s, char c)
@@ -72,27 +89,37 @@ char	**ft_split(char const *s, char c)
 	char	**strings;
 	int		size;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
 	size = count_words(s, c);
-	strings = malloc (sizeof(char *) * (size + 1));
-	strings[size] = 0;
+	strings = malloc(sizeof(char *) * (size + 1));
+	if (!strings)
+		return (NULL);
 	write_s(strings, s, c);
 	return (strings);
 }
 
-#include <stdio.h>
-
-int	main(void)
+/*size_t ft_strlen2(char **str)
 {
-	char s[] = "To be, or not to be. This is the question.";
-	char **stab = ft_split(s, ' ');
-	for (int i = 0; i < ft_strlen2(stab); i++)
-	{
-		for(int j = 0;  j < ft_strlen(stab[i]); j++)
-			printf("%c", stab[i][j]);
-		printf("%s","\n");
-	}
-	free(stab);
-	return (0);
+    size_t i = 0;
+
+    if (*str == NULL)
+        return 0;
+    while (str[i] != NULL)
+        i++;
+    return i;
 }
+
+int main(void)
+{
+    char s[] = "To be, or not to be. This is the question.";
+    //char s[] = "Hello!";
+	char **stab = ft_split(s, ' ');
+    for (size_t i = 0; i < ft_strlen2(stab); i++)
+    {
+        printf("%s\n", stab[i]);
+        free(stab[i]);
+    }
+    free(stab);
+    return 0;
+}*/
