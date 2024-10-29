@@ -6,24 +6,10 @@
 /*   By: meferraz <meferraz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 09:50:22 by meferraz          #+#    #+#             */
-/*   Updated: 2024/10/25 17:16:27 by meferraz         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:32:08 by meferraz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/libft.h"
-
-/*void	*ft_memcpy(void *dest, const void *src, size_t n);
-
-int	main(void)
-{
-	char	s[] =  "Hello I am a test";
-	char	buff[50];
-	char	buff2[50];
-
-	ft_memcpy(buff, s, 17);
-	memcpy(buff2, s, 17);
-	printf("%s\n%s\n", buff, buff2);
-	return (0);
-}*/
+#include "./libft.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
@@ -31,7 +17,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char		*d;
 	size_t				i;
 
-	if (!src && !dest)
+	if (!dest && !src)
 		return (NULL);
 	s = src;
 	d = dest;
@@ -41,6 +27,5 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 		d[i] = s[i];
 		i++;
 	}
-	d[i] = '\0';
 	return (dest);
 }

@@ -1,5 +1,5 @@
 #==============================================================================#
-#                                   LIBFT PROJECT                              #
+#                         TESTS FOR LIBFT PROJECT                              #
 #==============================================================================#
 
 NAME = functions_test
@@ -10,78 +10,95 @@ EXEC = libft_tester.out
 #                            	  NAMES AND PATHS                              #
 #------------------------------------------------------------------------------#
 
-SRCDIR = srcs_tests
-INC_PATH=.
-BUILD_PATH=.build
-HEADERS = test.h
-SRCS = ${addprefix ${SRCDIR}/,ft_isalpha_test.c ft_isdigit_test.c \
-	ft_isalnum_test }#ft_isascii_test.c ft_isprint_test.c \
-	#ft_strlen_test.c ft_memset_test.c ft_bzero_test.c \
-	#ft_memcpy_test.c ft_memmove_test.c ft_strlcpy_test.c \
-	#ft_strlcat_test.c ft_toupper_test.c ft_tolower_test.c \
-	#ft_strchr_test.c ft_strrchr_test.c ft_strncmp_test.c \
-	#ft_memchr_test.c } 
-	#ft_memcmp_test.c ft_strnstr_test.c \
-		# ft_atoi_test.c ft_calloc_test.c ft_strdup_test.c \
-		# ft_substr_test.c ft_strjoin_test.c ft_strtrim_test.c \
-		# ft_split_test.c ft_itoa_test.c ft_strmapi_test.c \
-		# ft_striteri_test.c ft_putchar_fd_test.c ft_putstr_fd_test.c \
-		# ft_putendl_fd_test.c ft_putnbr_fd_test.c}
-SRCS += main.c
+SRC_PATH = srcs_tests
+BONUS_PATH = srcs_bonus_tests
+LIBFT_PATH = ..
+INC_PATH = .
+BUILD_PATH = .build
+HEADERS = ${INC_PATH}/test.h
 
-OBJS = ${SRCS:.c=.o}
+SRCS = ${addprefix ${SRC_PATH}/, ft_isalpha_test.c ft_isdigit_test.c ft_isalnum_test.c \
+    ft_isascii_test.c ft_isprint_test.c ft_strlen_test.c ft_memset_test.c \
+    ft_bzero_test.c ft_memcpy_test.c ft_memmove_test.c ft_strlcpy_test.c ft_strlcat_test.c \
+    ft_toupper_test.c ft_tolower_test.c ft_strchr_test.c ft_strrchr_test.c \
+	ft_strncmp_test.c ft_memchr_test.c ft_memcmp_test.c ft_strnstr_test.c ft_atoi_test.c \
+    ft_calloc_test.c ft_strdup_test.c ft_substr_test.c ft_strjoin_test.c ft_strtrim_test.c \
+    ft_split_test.c ft_itoa_test.c ft_strmapi_test.c ft_striteri_test.c \
+    ft_putchar_fd_test.c ft_putstr_fd_test.c ft_putendl_fd_test.c ft_putnbr_fd_test.c \
+	main.c}
+SRCS_BONUS = ${addprefix ${BONUS_PATH}/, ft_lstnew_test.c ft_lstadd_front_test.c \
+    ft_lstsize_test.c ft_lstlast_test.c ft_lstadd_back_test.c ft_lstdelone_test.c \
+    ft_lstclear_test.c ft_lstiter_test.c ft_lstmap_test.c main.c}
+OBJS = ${addprefix ${BUILD_PATH}/, ${notdir ${SRCS:.c=.o}}}
+OBJS_BONUS = ${addprefix ${BUILD_PATH}/, ${notdir ${SRCS_BONUS:.c=.o}}}
 
 #------------------------------------------------------------------------------#
 #                            	   FLAGS & COMMANDS                            #
 #------------------------------------------------------------------------------#
 
-MAKE = make -C
 CC = cc
 CCFLAGS = -Wall -Wextra -Werror
-L = -L.. -lft 
+LDFLAGS = -L.. -lft
 INC = -I ${INC_PATH}
-
 RM = rm -fr
 MKDIR_P = mkdir -p
+MAKE = make -C
+MAKE_BONUS = make bonus -C
 
 #------------------------------------------------------------------------------#
 #                            	       RULES                                   #
 #------------------------------------------------------------------------------#
 
-##  Compilation Rules for Libft  ##
-
 all: ${NAME}
 
-${NAME}: ${OBJS} ${LIBFT_ARC}
-	${CC} ${CCFLAGS} ${OBJS} ${LIBFT_ARC} -o ${EXEC}
+${BUILD_PATH}:
+	${MKDIR_P} ${BUILD_PATH}
 	@echo "\n*********************** \
-		\n${NAME} was created sucessfully! \
-		\nType ./${EXEC} to execute the program! \
+		\n${BUILD_PATH} folder was created successfully! \
 		\n***********************\n"
 
-${SRCDIR}/%.o: ${SRCDIR}/%.c ${HEADERS}
-	${CC} ${CCFLAGS} -I ${HEADERS} -c $< -o $@
+${NAME}: ${BUILD_PATH} ${OBJS} ${LIBFT_ARC}
+	${CC} ${CCFLAGS} ${OBJS} ${LDFLAGS} -o ${EXEC}
+	@echo "\n*********************** \
+		\n${NAME} was created successfully! \
+		\n Type ./${EXEC} to execute the program! \
+		\n***********************\n"
 
+# Rule for compiling source files
+${BUILD_PATH}/%.o: ${SRC_PATH}/%.c ${HEADERS} | ${BUILD_PATH}
+	${CC} ${CCFLAGS} ${INC} -c $< -o $@
+
+${BUILD_PATH}/%.o: ${BONUS_PATH}/%.c ${HEADERS} | ${BUILD_PATH}
+	${CC} ${CCFLAGS} ${INC} -c $< -o $@
+
+${BUILD_PATH}/main.o: main.c ${HEADERS} | ${BUILD_PATH}
+	${CC} ${CCFLAGS} ${INC} -c $< -o $@
+
+# Ensure the libft.a is built
 ${LIBFT_ARC}:
+	${MAKE} ${LIBFT_PATH}
 
+${LIBFT_ARC_BONUS}:
+	${MAKE_BONUS} ${LIBFT_PATH}
 
-##  Testing Rules  ##
-
-##test: ${MAIN_O} ${NAME}
-##	${CC} ${CCFLAGS} ${MAIN_O} ${L} -o ${NAME}
-
-##${TESTDIR}/%.o:  ${TESTDIR}/%.c ${HEADERS} ${SRCDIR}/%.c
-##	${CC} ${CCFLAGS} -I ${INCDIR} -c $< -o $@ 
+bonus: ${BUILD_PATH} ${OBJS_BONUS} ${LIBFT_ARC_BONUS}
+	${CC} ${CCFLAGS} ${OBJS_BONUS} ${LDFLAGS} -o ${EXEC}
+	@echo "\n*********************** \
+		\n Type ./${EXEC} to execute the program! \
+		\n${NAME} was created successfully to test BONUS! \
+		\n***********************\n"
 
 ##  Cleaning Rules  ##
 
 clean:
-	${RM} ${OBJS}
-	${RM} ${MAIN_O}
+	${RM} ${OBJS} ${OBJS_BONUS}
+	@echo "Object files removed."
 
 fclean: clean
-	${RM} ${NAME}
+	${RM} ${EXEC}
+	${RM} ${BUILD_PATH}
+	@echo "Executable and build files removed."
 
-re: fclean ${NAME}
+re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

@@ -10,26 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
-
-void	ft_bzero(void *s, size_t n);
-/*
-int	main(void)
-{
-	char	s1[] = "Hello I am just a test.";
-	char	s2[] = "Hello I am just a test.";
-	
-	ft_bzero(s1, 4);
-	bzero(s2, 4);
-	printf("%s\n %s\n", s1, s2);
-}*/
+#include "./libft.h"
 
 void	ft_bzero(void *s, size_t n)
 {
 	char	*ptr;
 
-	if (!s)
-		return ;
 	ptr = s;
 	while (n)
 	{

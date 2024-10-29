@@ -9,9 +9,9 @@
 /*   Updated: 2024/10/18 16:48:17 by meferraz        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/libft.h"
+#include "./libft.h"
 
-char	ft_tolower(char c)
+int	ft_tolower(int c)
 {
 	if (c >= 'A' && c <= 'Z')
 		c += 32;

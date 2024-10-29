@@ -17,8 +17,7 @@ int	main(void)
 	ft_isalpha_test();
 	ft_isdigit_test();
 	ft_isalnum_test();
-	
-	/*ft_isupper_test();
+	ft_isupper_test();
 	ft_islower_test();
 	ft_isascii_test();
 	ft_isprint_test();
@@ -31,12 +30,11 @@ int	main(void)
 	ft_strlcat_test();
 	ft_toupper_test();
 	ft_tolower_test();
-
 	ft_strchr_test();
 	ft_strrchr_test();
 	ft_strncmp_test();
 	ft_memchr_test();
-	/*ft_memcmp_test();
+	ft_memcmp_test();
 	ft_strnstr_test();
 	ft_atoi_test();
 	ft_calloc_test();
@@ -52,15 +50,6 @@ int	main(void)
 	ft_putstr_fd_test();
 	ft_putendl_fd_test();
 	ft_putnbr_fd_test();
-	// BONUS PART
-	ft_lstnew_test();
-	ft_lstadd_front_test();
-	ft_lstsize_test();
-	ft_lstlast_test();
-	ft_lstadd_back_test();
-	ft_lstdelone_test();
-	ft_lstclear_test();
-	ft_lstiter_test();
-	ft_lstmap_test();*/
+
 	return (0);
 }

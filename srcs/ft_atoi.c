@@ -9,7 +9,7 @@
 /*   Updated: 2024/10/24 09:34:45 by meferraz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/libft.h"
+#include "./libft.h"
 
 int	ft_atoi(const char *nptr)
 {
@@ -33,12 +33,3 @@ int	ft_atoi(const char *nptr)
 	}
 	return (sign * result);
 }
-/*
-int	main(void)
-{
-	char *s = "      -+12345ji904 ";
-
-	printf("%d\n", atoi(s));
-	printf("%d\n", ft_atoi(s));
-	return (0);
-}*/

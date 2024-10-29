@@ -10,28 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "./libft.h"
 
-static size_t	count_size(long n);
-static char	*ft_itoa_pos(long n);
-static char	*ft_itoa_neg(long n);
-static long	absolute(long n);
-
-char	*ft_itoa(int n)
+static long	absolute(long n)
 {
-	long	nb;
-	
-	nb = n;
 	if (n < 0)
-		return (ft_itoa_neg(-nb));
+		return (-n);
 	else
-		return (ft_itoa_pos(nb));
+		return (n);
 }
 
 static size_t	count_size(long n)
 {
-	size_t counter;
-	long	nb;
+	size_t		counter;
+	long		nb;
 
 	nb = absolute(n);
 	counter = 0;
@@ -47,9 +39,9 @@ static size_t	count_size(long n)
 
 static char	*ft_itoa_pos(long n)
 {
-	char	*p;
-	size_t	size;
-	
+	size_t		size;
+	char		*p;
+
 	size = count_size(n);
 	p = malloc(sizeof(char) * (size + 1));
 	if (!p)
@@ -67,7 +59,7 @@ static char	*ft_itoa_neg(long n)
 {
 	char	*p;
 	size_t	size;
-	
+
 	size = count_size(n);
 	p = malloc(sizeof(char) * (size + 2));
 	if (!p)
@@ -82,22 +74,13 @@ static char	*ft_itoa_neg(long n)
 	return (p);
 }
 
-static long absolute(long n)
+char	*ft_itoa(int n)
 {
+	long	nb;
+
+	nb = n;
 	if (n < 0)
-		return (-n);
+		return (ft_itoa_neg(-nb));
 	else
-		return (n);
+		return (ft_itoa_pos(nb));
 }
-/*
-int main() {
-    int numbers[] = {123, -456, 0, 789, -2147483648}; // Include edge case for INT_MIN
-    for (int i = 0; i < 5; i++) {
-        char *result = ft_itoa(numbers[i]);
-        if (result) {
-            printf("itoa(%d) = %s\n", numbers[i], result);
-            free(result); // Free allocated memory
-        }
-    }
-    return 0;
-}*/

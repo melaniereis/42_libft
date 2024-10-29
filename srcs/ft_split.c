@@ -9,7 +9,7 @@
 /*   Updated: 2024/10/25 16:38:47 by meferraz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../includes/libft.h"
+#include "./libft.h"
 
 static size_t	count_words(char const *s, char c)
 {
@@ -98,28 +98,3 @@ char	**ft_split(char const *s, char c)
 	write_s(strings, s, c);
 	return (strings);
 }
-
-/*size_t ft_strlen2(char **str)
-{
-    size_t i = 0;
-
-    if (*str == NULL)
-        return 0;
-    while (str[i] != NULL)
-        i++;
-    return i;
-}
-
-int main(void)
-{
-    char s[] = "To be, or not to be. This is the question.";
-    //char s[] = "Hello!";
-	char **stab = ft_split(s, ' ');
-    for (size_t i = 0; i < ft_strlen2(stab); i++)
-    {
-        printf("%s\n", stab[i]);
-        free(stab[i]);
-    }
-    free(stab);
-    return 0;
-}*/
