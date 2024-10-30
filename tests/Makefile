@@ -1,5 +1,5 @@
 #==============================================================================#
-#                         TESTS FOR LIBFT PROJECT                              #
+#                         TESTS FOR LIBFT PROJECT                               #
 #==============================================================================#
 
 NAME = functions_test
@@ -7,7 +7,36 @@ LIBFT_ARC = ../libft.a
 EXEC = libft_tester.out
 
 #------------------------------------------------------------------------------#
-#                            	  NAMES AND PATHS                              #
+#                                COLORS & STYLES                                #
+#------------------------------------------------------------------------------#
+
+# Colors
+RED = \033[0;31m
+GREEN = \033[0;32m
+YELLOW = \033[0;33m
+BLUE = \033[0;34m
+PURPLE = \033[0;35m
+CYAN = \033[0;36m
+WHITE = \033[0;37m
+RESET = \033[0m
+
+# Styles
+BOLD = \033[1m
+DIM = \033[2m
+ITALIC = \033[3m
+UNDERLINE = \033[4m
+
+# Emojis
+CHECK = ✓
+TEST = 🧪
+BUILD = 🔨
+ROCKET = 🚀
+CLEAN = 🧹
+SPARKLES = ✨
+FOLDER = 📁
+
+#------------------------------------------------------------------------------#
+#                            	  NAMES AND PATHS                                 #
 #------------------------------------------------------------------------------#
 
 SRC_PATH = srcs_tests
@@ -28,12 +57,12 @@ SRCS = ${addprefix ${SRC_PATH}/, ft_isalpha_test.c ft_isdigit_test.c ft_isalnum_
 	main.c}
 SRCS_BONUS = ${addprefix ${BONUS_PATH}/, ft_lstnew_test.c ft_lstadd_front_test.c \
     ft_lstsize_test.c ft_lstlast_test.c ft_lstadd_back_test.c ft_lstdelone_test.c \
-    ft_lstclear_test.c ft_lstiter_test.c ft_lstmap_test.c main.c}
+    ft_lstclear_test.c ft_lstiter_test.c ft_lstmap_test.c main_bonus.c}
 OBJS = ${addprefix ${BUILD_PATH}/, ${notdir ${SRCS:.c=.o}}}
 OBJS_BONUS = ${addprefix ${BUILD_PATH}/, ${notdir ${SRCS_BONUS:.c=.o}}}
 
 #------------------------------------------------------------------------------#
-#                            	   FLAGS & COMMANDS                            #
+#                            	   FLAGS & COMMANDS                               #
 #------------------------------------------------------------------------------#
 
 CC = cc
@@ -46,58 +75,57 @@ MAKE = make -C
 MAKE_BONUS = make bonus -C
 
 #------------------------------------------------------------------------------#
-#                            	       RULES                                   #
+#                            	       RULES                                      #
 #------------------------------------------------------------------------------#
 
 all: ${NAME}
 
 ${BUILD_PATH}:
-	${MKDIR_P} ${BUILD_PATH}
-	@echo "\n*********************** \
-		\n${BUILD_PATH} folder was created successfully! \
-		\n***********************\n"
+	@printf "\n${BLUE}${BOLD}${FOLDER} Creating build directory...${RESET}\n"
+	@${MKDIR_P} ${BUILD_PATH}
+	@printf "${GREEN}${BOLD}${CHECK} Build directory created successfully!${RESET}\n"
 
 ${NAME}: ${BUILD_PATH} ${OBJS} ${LIBFT_ARC}
-	${CC} ${CCFLAGS} ${OBJS} ${LDFLAGS} -o ${EXEC}
-	@echo "\n*********************** \
-		\n${NAME} was created successfully! \
-		\n Type ./${EXEC} to execute the program! \
-		\n***********************\n"
+	@printf "\n${YELLOW}${BOLD}${BUILD} Building ${WHITE}${EXEC}${YELLOW}...${RESET}\n"
+	@${CC} ${CCFLAGS} ${OBJS} ${LDFLAGS} -o ${EXEC}
+	@printf "${GREEN}${BOLD}${ROCKET} Test executable created successfully!${RESET}\n"
 
 # Rule for compiling source files
 ${BUILD_PATH}/%.o: ${SRC_PATH}/%.c ${HEADERS} | ${BUILD_PATH}
-	${CC} ${CCFLAGS} ${INC} -c $< -o $@
+	@printf "${CYAN}${DIM}Compiling test: ${WHITE}%-30s${RESET}\r" ${notdir $<}
+	@${CC} ${CCFLAGS} ${INC} -c $< -o $@
 
 ${BUILD_PATH}/%.o: ${BONUS_PATH}/%.c ${HEADERS} | ${BUILD_PATH}
-	${CC} ${CCFLAGS} ${INC} -c $< -o $@
-
-${BUILD_PATH}/main.o: main.c ${HEADERS} | ${BUILD_PATH}
-	${CC} ${CCFLAGS} ${INC} -c $< -o $@
+	@printf "${PURPLE}${DIM}Compiling bonus test: ${WHITE}%-30s${RESET}\r" ${notdir $<}
+	@${CC} ${CCFLAGS} ${INC} -c $< -o $@
 
 # Ensure the libft.a is built
 ${LIBFT_ARC}:
-	${MAKE} ${LIBFT_PATH}
+	@printf "\n${BLUE}${BOLD}${BUILD} Building libft...${RESET}\n"
+	@${MAKE} ${LIBFT_PATH}
+	@printf "${GREEN}${BOLD}${CHECK} libft.a built successfully!${RESET}\n"
 
 ${LIBFT_ARC_BONUS}:
-	${MAKE_BONUS} ${LIBFT_PATH}
+	@printf "\n${PURPLE}${BOLD}${BUILD} Building libft with bonus...${RESET}\n"
+	@${MAKE_BONUS} ${LIBFT_PATH}
+	@printf "${GREEN}${BOLD}${CHECK} libft.a with bonus built successfully!${RESET}\n"
 
 bonus: ${BUILD_PATH} ${OBJS_BONUS} ${LIBFT_ARC_BONUS}
-	${CC} ${CCFLAGS} ${OBJS_BONUS} ${LDFLAGS} -o ${EXEC}
-	@echo "\n*********************** \
-		\n Type ./${EXEC} to execute the program! \
-		\n${NAME} was created successfully to test BONUS! \
-		\n***********************\n"
-
+	@printf "\n${PURPLE}${BOLD}${SPARKLES} Building bonus tests...${RESET}\n"
+	@${CC} ${CCFLAGS} ${OBJS_BONUS} ${LDFLAGS} -o ${EXEC}
+	@printf "${GREEN}${BOLD}${ROCKET} Bonus test executable created successfully!${RESET}\n"
 ##  Cleaning Rules  ##
 
 clean:
-	${RM} ${OBJS} ${OBJS_BONUS}
-	@echo "Object files removed."
+	@printf "\n${YELLOW}${BOLD}${CLEAN} Cleaning test objects...${RESET}\n"
+	@${RM} ${OBJS} ${OBJS_BONUS}
+	@printf "${GREEN}${BOLD}${CHECK} Test object files cleaned!${RESET}\n"
 
 fclean: clean
-	${RM} ${EXEC}
-	${RM} ${BUILD_PATH}
-	@echo "Executable and build files removed."
+	@printf "${YELLOW}${BOLD}${CLEAN} Removing test executable and build files...${RESET}\n"
+	@${RM} ${EXEC}
+	@${RM} ${BUILD_PATH}
+	@printf "${GREEN}${BOLD}${CHECK} All test files cleaned!${RESET}\n"
 
 re: fclean all
 

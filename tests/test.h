@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef TEST_H
 # define TEST_H
 
@@ -23,6 +22,9 @@
 # define YELLOW "\033[0;33m"
 # define MAGENTA "\033[0;35m"
 # define BLUE "\033[0;34m"
+
+// For final summary test
+extern void save_test_results(const char *test_name, int total, int failed);
 
 // Mandatory Part 1
 void	ft_isalpha_test(void);
