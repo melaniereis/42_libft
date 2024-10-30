@@ -75,9 +75,9 @@ AR = ar rcs                       # Archive command to create static libraries
 RM = rm -fr                       # Command to remove files/directories forcefully
 MKDIR_P = mkdir -p                # Command to create directories (with parent)
 MAKE = make --no-print-directory -C  # Command to invoke make in subdirectories quietly
-MAKE_BONUS = make --no-print-directory bonus -C  # Command for bonus make quietly
-MAKE_CLEAN = make --no-print-directory clean -C  # Command for clean in subdirectories quietly
-MAKE_FCLEAN = make --no-print-directory fclean -C  # Command for fclean in subdirectories quietly
+MAKE_BONUS = make bonus --no-print-directory -C  # Command for bonus make quietly
+MAKE_CLEAN = make clean --no-print-directory -C  # Command for clean in subdirectories quietly
+MAKE_FCLEAN = make fclean --no-print-directory -C  # Command for fclean in subdirectories quietly
 
 INC = -I ${INC_PATH}              # Include path for header files
 
@@ -117,7 +117,7 @@ bonus: ${OBJS} ${OBJS_BONUS}   # Assemble bonus functions into the library
 ##  Testing Rules  ##
 
 test: all                       # Run tests after building the library
-	@make start_tmux             # Start a tmux session for testing
+	@make --no-print-directory start_tmux             # Start a tmux session for testing
 
 start_tmux:                     # Start a new tmux session if not already in one
 	@if [ -z "$$TMUX" ]; then \
@@ -130,14 +130,14 @@ start_tmux:                     # Start a new tmux session if not already in one
 
 run_tests: norm_mandatory      # Run tests and check norms before execution
 	@printf "\n${BLUE}${BOLD}${BOOK} Running tests...${RESET}\n"
-	@(${MAKE} ${TESTS_PATH} 2>&1 | grep -v "Leaving directory") || true  # Suppress leaving directory messages 
+	@${MAKE} ${TESTS_PATH}
 	@mv ${TESTS_PATH}/${EXEC} .
 	@./${EXEC}
-	@make --no-print-directory norm_bonus > /dev/null 2>&1   # Check norms after running tests quietly 
+	@make --no-print-directory norm_mandatory
 	@printf "${GREEN}${BOLD}${CHECK} Tests completed!${RESET}\n"
 
 test_bonus: all                # Run bonus tests after building the library and norms check 
-	@make start_tmux_bonus      # Start a tmux session for bonus testing 
+	@make --no-print-directory start_tmux_bonus      # Start a tmux session for bonus testing 
 
 start_tmux_bonus:              # Start a new tmux session for bonus testing if not already in one 
 	@if [ -z "$$TMUX" ]; then \
@@ -150,10 +150,10 @@ start_tmux_bonus:              # Start a new tmux session for bonus testing if n
 
 run_tests_bonus: norm_all      # Run bonus tests and check all norms before execution 
 	@printf "\n${PURPLE}${BOLD}${BOOK} Running bonus tests...${RESET}\n"
-	@(${MAKE_BONUS} ${TESTS_PATH} 2>&1 | grep -v "Leaving directory") || true  # Suppress leaving directory messages 
+	@{MAKE_BONUS} ${TESTS_PATH}
 	@mv ${TESTS_PATH}/${EXEC} .
 	@./${EXEC}
-	@make --no-print-directory norm_bonus > /dev/null 2>&1   # Check norms after running bonus tests quietly 
+	@make --no-print-directory norm_bonus
 	@printf "${GREEN}${BOLD}${CHECK} Bonus tests completed!${RESET}\n"
 
 ##  Norms Rules  ##
@@ -206,6 +206,6 @@ fclean: clean               # Fully clean up by removing executables and build d
 	@${MAKE_FCLEAN} ${TESTS_PATH}
 	@printf "${GREEN}${BOLD}${CHECK} All files cleaned!${RESET}\n"
 
-re: fclean $(NAME)          # Rebuild everything from scratch 
+re: fclean ${NAME}          # Rebuild everything from scratch 
 
 .PHONY: all test clean fclean re test norm start_tmux start_tmux_bonus   # Declare phony targets 
