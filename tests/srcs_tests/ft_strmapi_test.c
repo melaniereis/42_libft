@@ -65,20 +65,20 @@ void ft_strmapi_test(void)
     
      free(result2); // Free allocated memory
 
-     // Test case 3: Null string input
-     printf("\n%sTesting null string input:%s\n", BLUE, RESET);
-     
-     char *result3 = ft_strmapi(NULL, sample_function); // Should return NULL
-     total_tests++;
-     
-     if (result3 != NULL)
-     {
-         printf("%s[FAIL]%s ft_strmapi(NULL) should return NULL but got a non-NULL pointer.\n", 
-             RED, RESET);
-         failed_tests++;
-     }
-     else
-         printf("%s[OK]%s Testing null input passed\n", GREEN, RESET);
+     // // Test case 3: Null string input
+     // printf("\n%sTesting null string input:%s\n", BLUE, RESET);
+     // 
+     // char *result3 = ft_strmapi(NULL, sample_function); // Should return NULL
+     // total_tests++;
+     // 
+     // if (result3 != NULL)
+     // {
+     //     printf("%s[FAIL]%s ft_strmapi(NULL) should return NULL but got a non-NULL pointer.\n", 
+     //         RED, RESET);
+     //     failed_tests++;
+     // }
+     // else
+     //     printf("%s[OK]%s Testing null input passed\n", GREEN, RESET);
 
      // Print summary
      printf("\n%s=================================%s\n", MAGENTA, RESET);

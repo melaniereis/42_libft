@@ -109,7 +109,7 @@ ${BUILD_PATH}/%.o: ${BONUS_PATH}/%.c ${HEADERS}  # Compile bonus source files in
 	@printf "${CYAN}${DIM}Compiling: ${WHITE}%-30s${RESET}\r" ${notdir $<}
 	@${CC} ${CCFLAGS} ${INC} -c $< -o $@
 
-bonus: ${OBJS} ${OBJS_BONUS}   # Assemble bonus functions into the library
+bonus: ${BUILD_PATH} ${OBJS} ${OBJS_BONUS}   # Assemble bonus functions into the library
 	@printf "\n${PURPLE}${BOLD}${SPARKLES} Assembling bonus functions...${RESET}\n"
 	@${AR} ${NAME} ${OBJS} ${OBJS_BONUS}
 	@printf "${GREEN}${BOLD}${ROCKET} ${WHITE}${NAME}${GREEN} created successfully with BONUS!${RESET}\n"
@@ -196,15 +196,16 @@ norm_all:                     # Check norms for all sources
 clean:                       # Clean up object files and temporary build files 
 	@printf "\n${YELLOW}${BOLD}${CLEAN} Cleaning object files...${RESET}\n"
 	@${RM} ${OBJS} ${OBJS_BONUS}
-	@${MAKE_CLEAN} ${TESTS_PATH}
 	@printf "${GREEN}${BOLD}${CHECK} Object files cleaned!${RESET}\n"
+	@${MAKE_CLEAN} ${TESTS_PATH}
 
 fclean: clean               # Fully clean up by removing executables and build directories 
 	@printf "${YELLOW}${BOLD}${CLEAN} Removing executable and build files...${RESET}\n"
 	@${RM} ${NAME}
 	@${RM} ${BUILD_PATH}
-	@${MAKE_FCLEAN} ${TESTS_PATH}
+	@${RM} ${EXEC}
 	@printf "${GREEN}${BOLD}${CHECK} All files cleaned!${RESET}\n"
+	@${MAKE_FCLEAN} ${TESTS_PATH}
 
 re: fclean ${NAME}          # Rebuild everything from scratch 
 
