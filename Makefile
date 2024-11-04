@@ -179,6 +179,12 @@ norm_bonus:                    # Check norms for bonus sources
 		printf "${RED}${BOLD}❌ Norminette errors found.${RESET}\n"; \
 	fi
 	@printf "${GREEN}${BOLD}${CHECK} Norminette check completed!${RESET}\n"
+	
+##   Check for external functions  ##
+check_external_functions: all               # Check norms for mandatory sources 
+	@printf "\n${BLUE}${BOLD}${TEST} Checking External Functions...${RESET}\n"
+	nm ./${NAME} | grep "U" | grep -v "__"
+	@printf "${GREEN}${BOLD}${CHECK} External functions check completed!${RESET}\n"
 
 norm_all:                     # Check norms for all sources 
 	@printf "\n${BLUE}${BOLD}${TEST} Checking Norminette...${RESET}\n"
